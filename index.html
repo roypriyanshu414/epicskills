@@ -3,17 +3,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Silent Library</title>
 <style>
-:root{--bg:#faf8f4;--card:#fff;--tx:#1d1d1f;--mu:#6b6b70;--ac:#0f766e;--ac2:#0b5c56;--bd:#e7e3da;--bad:#b42318;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--card:#1f1f1e;--tx:#f2f0ea;--mu:#a3a29c;--bd:#33322f;--ac:#2dd4bf;--ac2:#5eead4}}
-:root[data-theme="dark"]{--bg:#151514;--card:#1f1f1e;--tx:#f2f0ea;--mu:#a3a29c;--bd:#33322f;--ac:#2dd4bf;--ac2:#5eead4}
+:root{--bg:#f5f6f8;--card:#fff;--tx:#111827;--mu:#4b5563;--ac:#0f766e;--ac2:#0b5c56;--bd:#d9dde3;--bad:#b42318;--onac:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{--bg:#0f1115;--card:#181b21;--tx:#f3f4f6;--mu:#b6bcc8;--bd:#2d323b;--ac:#2dd4bf;--ac2:#5eead4;--onac:#04211d}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",sans-serif}
 a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
 nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--card);border-bottom:1px solid var(--bd);z-index:5}
-nav .wrap{display:flex;align-items:center;gap:14px;height:56px}nav b{font-size:18px;margin-right:auto}nav a{font-size:14px;color:var(--mu)}nav a:hover{color:var(--ac)}
-.btn{display:inline-block;background:var(--ac);color:#fff;border:0;border-radius:10px;padding:11px 18px;font-weight:600;cursor:pointer;text-align:center;transition:transform .15s}
-:root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#06201d}
+nav .wrap{display:flex;align-items:center;gap:14px;min-height:60px}.brand{font:700 20px Georgia,"Noto Serif Devanagari",serif;margin-right:auto}
+.links{display:flex;align-items:center;gap:4px}.links a:not(.btn){font-size:14.5px;font-weight:500;color:var(--tx);padding:8px 10px;border-radius:8px}.links a:not(.btn):hover{background:var(--bg);color:var(--ac2)}
+.burger,.ic{background:var(--card);border:1px solid var(--bd);border-radius:8px;width:40px;height:40px;cursor:pointer;font-size:18px;color:var(--tx)}.burger{display:none}
+@media(max-width:860px){.burger{display:block}.links{display:none;position:absolute;left:0;right:0;top:100%;background:var(--card);border-bottom:1px solid var(--bd);padding:10px 16px 16px;flex-direction:column;align-items:stretch}.links.open{display:flex}.links a{padding:12px 10px!important}.links .ic{width:100%}}
+.btn{display:inline-block;background:var(--ac);color:var(--onac);border:0;border-radius:10px;padding:11px 18px;font-weight:600;cursor:pointer;text-align:center;transition:transform .15s}
 .btn:hover{transform:translateY(-1px)}.btn.o{background:transparent;color:var(--ac);border:1.5px solid var(--ac)}.btn.s{padding:6px 11px;font-size:13px}.btn.d{background:var(--bad);color:#fff}.btn.b{display:block;width:100%;padding:14px}
 .hero{padding:36px 0 22px}.hero h1{font-size:clamp(30px,6vw,48px);margin:0 0 8px;line-height:1.1}.hero p{color:var(--mu);font-size:18px;margin:0 0 18px}.row{display:flex;gap:10px;flex-wrap:wrap}
 h2{margin:26px 0 12px}
@@ -25,7 +26,7 @@ h2{margin:26px 0 12px}
 .tag{display:inline-block;font-size:12px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:1px 9px;color:var(--mu)}
 .price{font-weight:700;font-size:18px}.old{text-decoration:line-through;color:var(--mu);font-weight:400;font-size:14px}.mu{color:var(--mu);font-size:14px}
 .bar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.bar input,.bar select,input,select,textarea{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;max-width:100%}
-.bar input{flex:1;min-width:150px}.chip{padding:7px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--card);cursor:pointer}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.bar input{flex:1;min-width:150px}.chip{padding:7px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--card);cursor:pointer}.chip.on{background:var(--ac);color:var(--onac);border-color:var(--ac)}
 .two{display:grid;gap:22px;grid-template-columns:1fr}@media(min-width:760px){.two{grid-template-columns:300px 1fr}}
 .box{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:14px}
 label{display:block;font-size:13px;color:var(--mu);margin:10px 0 3px}label input:not([type=checkbox]),label select,label textarea{width:100%}
@@ -35,17 +36,28 @@ td img,.th{width:36px;height:48px;object-fit:cover;border-radius:4px;display:blo
 .st{font-size:12px;padding:2px 9px;border-radius:20px;background:var(--bd)}.st.Paid{background:#d1fae5;color:#065f46}.st.Pending{background:#fef3c7;color:#92400e}.st.Failed,.st.Cancelled{background:#fee2e2;color:#991b1b}
 .adm{display:grid;gap:16px;grid-template-columns:1fr;padding-top:14px}@media(min-width:800px){.adm{grid-template-columns:190px 1fr}}
 .side{display:flex;gap:6px;flex-wrap:wrap}@media(min-width:800px){.side{flex-direction:column;flex-wrap:nowrap}}
-.side a{padding:9px 12px;border-radius:8px;background:var(--card);border:1px solid var(--bd);font-size:14px}.side a.on{background:var(--ac);color:#fff}
+.side a{padding:9px 12px;border-radius:8px;background:var(--card);border:1px solid var(--bd);font-size:14px}.side a.on{background:var(--ac);color:var(--onac)}
 .stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.stats b{font-size:26px;display:block}
 .tools{display:flex;gap:6px}.sp{display:flex;justify-content:space-between;gap:8px;padding:5px 0}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#1d1d1f;color:#fff;padding:11px 18px;border-radius:10px;z-index:30;display:none}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}.modal .box{max-width:360px;margin:0}
 footer{margin:40px 0 20px;color:var(--mu);font-size:13px;text-align:center}
+h1,h2,h3{font-family:Georgia,"Noto Serif Devanagari",serif;letter-spacing:-.01em}
+:root[data-theme="dark"] .btn:not(.o):not(.d){color:var(--onac)}.btn.d{color:#fff}.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.card{transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.12)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.hero{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:36px 24px;margin-top:18px}.hs{display:flex;gap:8px;margin:0 0 14px;max-width:560px}.hs input{flex:1;min-width:0}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.sh a{color:var(--ac2);font-weight:600;font-size:14px}
+.narrow{max-width:400px;margin:30px auto}.doc{max-width:720px;margin:24px auto;line-height:1.7}.doc h1{margin-bottom:6px}
+details{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin:8px 0}summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--bd);padding-top:20px}.fl{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-bottom:10px}.fl a{color:var(--tx);font-size:14px}.fl a:hover{color:var(--ac2);text-decoration:underline}
+.tabs{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
 </style></head><body>
-<nav><div class="wrap"><b><a href="#/" id="brand"></a></b><a href="#/books">Books</a><a href="#/books?l=Hindi">हिंदी</a><a href="#/books?l=English">English</a><a href="#/cart" id="cartlink">Cart</a></div></nav>
+<nav><div class="wrap"><a class="brand" href="#/" id="brand"></a><button class="burger" id="burger" aria-label="Menu" aria-expanded="false">☰</button><div class="links" id="links"><a href="#/">Home</a><a href="#/books?l=All">All Books</a><a href="#/books?l=Hindi">Hindi Books</a><a href="#/books?l=English">English Books</a><a href="#/cart" id="cartlink">Cart</a><a href="#/dashboard">Dashboard</a><a href="#/login">Login</a><a class="btn s" href="#/signup">Signup</a><button class="ic" id="theme" aria-label="Toggle light/dark theme">◐</button></div></div></nav>
 <main class="wrap" id="app"></main>
 <div id="toast"></div>
 <script>
+document.documentElement.dataset.theme=localStorage.getItem("sl_theme")||"light";
 /* ===== data layer (swap Store for Supabase/Firebase calls later) ===== */
 const CATS=['Self Development','Productivity','Career','Finance','Business','Motivation','Study','Other'];
 const LANGS=['English','Hindi','Other'];
@@ -86,12 +98,13 @@ const fileData=f=>new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.resu
 const isAdmin=()=>sessionStorage.getItem('sl_admin')==='1';
 function cartBadge(){const n=getCart().reduce((s,i)=>s+i.qty,0);$('#cartlink').textContent='Cart'+(n?` (${n})`:'');$('#brand').textContent=DB.settings.name}
 /* ===== customer UI ===== */
-const card=b=>`<div class="card"><a href="#/book/${b.id}">${cover(b)}</a><div><span class="tag">${LL(b.language)}</span> <span class="tag">${esc(b.category)}</span></div><b>${esc(b.title)}</b><div class="mu">${esc(b.shortDescription)}</div><div class="price">${rs(b.price)} ${b.originalPrice?`<span class="old">${rs(b.originalPrice)}</span>`:''}</div><div class="row"><a class="btn o s" href="#/book/${b.id}">View Details</a><button class="btn s" data-act="buy" data-id="${b.id}">Buy Now</button></div></div>`;
+const card=b=>`<div class="card"><a href="#/book/${b.id}">${cover(b)}</a><div><span class="tag">${LL(b.language)}</span> <span class="tag">${esc(b.category)}</span></div><b>${esc(b.title)}</b><div class="mu">by ${esc(b.author)}</div><div class="mu">${esc(b.shortDescription)}</div><div class="price">${rs(b.price)} ${b.originalPrice?`<span class="old">${rs(b.originalPrice)}</span>`:''}</div><div class="row"><a class="btn o s" href="#/book/${b.id}">View Details</a><button class="btn s" data-act="buy" data-id="${b.id}">Buy Now</button></div></div>`;
 const BookGrid=l=>l.length?`<div class="grid">${l.map(card).join('')}</div>`:'<p class="mu">No books found.</p>';
 let F={q:'',l:'All',c:'All',s:'popular'};
 function filtered(){const q=F.q.toLowerCase();let l=pubBooks().filter(b=>(F.l==='All'||b.language===F.l)&&(F.c==='All'||b.category===F.c)&&(!q||[b.title,b.category,b.language,LL(b.language),b.shortDescription,b.description,b.tags.join(' ')].join(' ').toLowerCase().includes(q)));
  const s={lo:(a,b)=>a.price-b.price,hi:(a,b)=>b.price-a.price,new:(a,b)=>b.createdAt-a.createdAt,popular:(a,b)=>sold(b.id)-sold(a.id)||(b.featured-a.featured)};return l.sort(s[F.s])}
-const pHome=()=>`<div class="hero"><h1>Good Books. Simple Prices.</h1><p>Practical digital books in English and Hindi — starting from just ₹30.</p><div class="row"><a class="btn" href="#/books">Explore Books</a><a class="btn o" href="#/books?l=Hindi">Hindi Books</a><a class="btn o" href="#/books?l=English">English Books</a></div></div><h2>Featured</h2>${BookGrid(pubBooks().filter(b=>b.featured))}`;
+const sec=(t,l,more)=>l.length?`<section><div class="sh"><h2>${t}</h2><a href="${more}">View all →</a></div>${BookGrid(l.slice(0,4))}</section>`:'';
+const pHome=()=>{const P=pubBooks(),L=x=>P.filter(b=>b.language===x);return `<div class="hero"><h1>Good Books. Simple Prices.</h1><p>Practical digital books in English and Hindi — starting from just ₹30.</p><form id="hs" class="hs"><input name="q" placeholder="Search books, categories, languages…" aria-label="Search books"><button class="btn">Search</button></form><div class="row"><a class="btn o" href="#/books?l=Hindi">Hindi Books</a><a class="btn o" href="#/books?l=English">English Books</a></div></div>`+sec('Featured Books',P.filter(b=>b.featured),'#/books?l=All')+sec('Latest Books',[...P].sort((a,b)=>b.createdAt-a.createdAt),'#/books?l=All')+sec('Hindi Books',L('Hindi'),'#/books?l=Hindi')+sec('English Books',L('English'),'#/books?l=English')+sec('Popular Books',[...P].sort((a,b)=>sold(b.id)-sold(a.id)||b.featured-a.featured),'#/books?l=All')};
 const pBooks=(qs)=>{F.l=qs.get('l')||F.l;F.c=qs.get('c')||F.c;return `<h2>Books</h2><div class="bar"><input id="q" placeholder="Search title, category, language…" value="${esc(F.q)}"></div><div class="bar" id="lf">${['All','English','Hindi'].map(l=>`<button class="chip ${F.l===l?'on':''}" data-act="lang" data-v="${l}">${l==='Hindi'?'हिंदी':l}</button>`).join('')}</div><div class="bar"><select id="cf"><option>All</option>${CATS.map(c=>`<option ${F.c===c?'selected':''}>${c}</option>`).join('')}</select><select id="sf">${[['popular','Popular'],['new','Newest'],['lo','Price: Low to High'],['hi','Price: High to Low']].map(([v,t])=>`<option value="${v}" ${F.s===v?'selected':''}>${t}</option>`).join('')}</select></div><div id="res">${BookGrid(filtered())}</div>`};
 const pBook=id=>{const b=bookById(id);if(!b||(!b.published&&!isAdmin()))return '<p>Book not found.</p>';const alt=pubBooks().find(x=>x.group===b.group&&x.id!==b.id&&x.language!==b.language);
  return `<div class="two" style="margin-top:18px"><div>${cover(b)}</div><div><span class="tag">${LL(b.language)}</span> <span class="tag">${esc(b.category)}</span><h1 style="margin:8px 0">${esc(b.title)}</h1><div class="mu">by ${esc(b.author)}${b.pages?' · '+b.pages+' pages':''}</div><p class="price" style="font-size:28px">${rs(b.price)} ${b.originalPrice?`<span class="old">${rs(b.originalPrice)}</span>`:''}</p><div class="row"><button class="btn" data-act="buy" data-id="${b.id}">Buy Now</button><button class="btn o" data-act="add" data-id="${b.id}">Add to Cart</button></div>${alt?`<div class="box" style="margin-top:14px">Available in another language: <a href="#/book/${alt.id}"><b>${esc(alt.title)} — ${LL(alt.language)}</b></a></div>`:''}<p>${esc(b.description)}</p><h3>What you'll learn</h3><ul>${b.whatYouLearn.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><h3>Who it's for</h3><ul>${b.whoItsFor.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`};
@@ -106,7 +119,13 @@ const pOrder=id=>{const o=DB.orders.find(x=>x.id===id);if(!o)return '<p>Order no
 /* ===== admin UI ===== */
 const nav=[['','Dashboard'],['books','Books'],['add','Add Book'],['orders','Orders'],['categories','Categories'],['settings','Settings']];
 const shell=(on,body)=>`<div class="adm"><div class="side">${nav.map(([k,t])=>`<a class="${on===k?'on':''}" href="#/admin/${k}">${t}</a>`).join('')}<a href="#" data-act="logout">Logout</a></div><div>${body}</div></div>`;
-const pLogin=()=>`<form id="login" class="box" style="max-width:380px;margin:30px auto"><h2 style="margin-top:0">Admin Login</h2><label>Email / Username<input name="u" required></label><label>Password<input name="p" type="password" required></label><div class="note"><b>Prototype only.</b> Demo credentials: admin / admin123. This check runs in the browser and is NOT secure. Production needs server-side authentication (e.g. Supabase Auth, Firebase Auth); never ship passwords in frontend code.</div><button class="btn b">Login</button></form>`;
+const sha=async t=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)))].map(x=>x.toString(16).padStart(2,'0')).join('');
+/* PROTOTYPE ADMIN GATE — device-local only, NOT secure (anyone can clear browser storage or edit this file).
+   PRODUCTION: replace with server-side auth (Supabase/Firebase Auth) + an admin role check enforced by database rules/API; never trust this flag. */
+async function adminAuth(v){const K='sl_admin_hash',h=localStorage.getItem(K);
+ if(!h){if((v.p||'').length<8)return toast('Use at least 8 characters');if(v.p!==v.p2)return toast('Passcodes do not match');localStorage.setItem(K,await sha('sl:'+v.p));sessionStorage.setItem('sl_admin','1');return route()}
+ if(await sha('sl:'+v.p)===h){sessionStorage.setItem('sl_admin','1');route()}else toast('Incorrect passcode')}
+const pLogin=()=>{const f=!localStorage.getItem('sl_admin_hash');return `<form id="login" class="box narrow"><h2 style="margin-top:0">${f?'Set Up Admin Access':'Admin Login'}</h2>${f?'<label>New passcode (8+ characters)<input name="p" type="password" minlength="8" required autocomplete="new-password"></label><label>Confirm passcode<input name="p2" type="password" required autocomplete="new-password"></label>':'<label>Passcode<input name="p" type="password" required autocomplete="current-password"></label>'}<div class="note"><b>Prototype only — not secure.</b> No password is stored in this code; the passcode you set is hashed and kept in this browser only. Before real use, connect server-side authentication (Supabase Auth / Firebase Auth) with an admin role.</div><button class="btn b">${f?'Create &amp; Enter':'Login'}</button></form>`};
 const pDash=()=>{const B=DB.books,O=DB.orders,P=O.filter(o=>o.status==='Paid');const S=[['Total Books',B.length],['English Books',B.filter(b=>b.language==='English').length],['Hindi Books',B.filter(b=>b.language==='Hindi').length],['Total Orders',O.length],['Paid Orders',P.length],['Revenue',rs(P.reduce((s,o)=>s+o.amount,0))]];
  return shell('',`<h2 style="margin-top:0">Dashboard</h2><div class="stats">${S.map(([t,v])=>`<div class="box"><span class="mu">${t}</span><b>${v}</b></div>`).join('')}</div>`)};
 let AF={q:'',l:'All',c:'All',s:'All',o:'new'};
@@ -121,11 +140,25 @@ const pOrders=()=>shell('orders',`<h2 style="margin-top:0">Orders</h2><div class
 const pOrderAdmin=id=>{const o=DB.orders.find(x=>x.id===id);if(!o)return shell('orders','<p>Not found.</p>');return shell('orders',`<h2 style="margin-top:0">Order ${o.id}</h2><div class="box"><p><b>${esc(o.name)}</b><br>${esc(o.email)} · ${esc(o.phone)}</p>${o.items.map(i=>`<div class="sp"><span>${esc(i.title)} (${LL(i.language)}) ×${i.qty}</span><span>${rs(i.price*i.qty)}</span></div>`).join('')}<div class="sp"><b>Amount</b><b>${rs(o.amount)}</b></div><p>Payment status: <select id="os" data-id="${o.id}">${['Pending','Paid','Failed','Cancelled','Refunded'].map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}</select></p><p>Payment reference: ${esc(o.ref)||'—'}<br>Date: ${new Date(o.date).toLocaleString()}<br>Download status: ${o.downloaded?'Downloaded':'Not downloaded'}</p><div class="note">Changing status here is a manual prototype control. In production only the verified gateway webhook sets PAID.</div></div>`)};
 const pCats=()=>shell('categories',`<h2 style="margin-top:0">Categories</h2><div class="box">${CATS.map(c=>`<div class="sp"><span>${c}</span><span class="mu">${DB.books.filter(b=>b.category===c).length} books</span></div>`).join('')}</div><p class="mu">Categories are fixed in this prototype (edit CATS in the data layer).</p>`);
 const pSettings=()=>{const s=DB.settings;return shell('settings',`<h2 style="margin-top:0">Settings</h2><form id="sf2" class="box"><label>Store Name<input name="name" value="${esc(s.name)}"></label><label>Store Description<textarea name="description">${esc(s.description)}</textarea></label><label>Contact Email<input name="email" type="email" value="${esc(s.email)}"></label><label>Instagram Link<input name="instagram" value="${esc(s.instagram)}"></label><label>Currency<input name="currency" value="${esc(s.currency)}"></label><label>Default Book Price<input name="defaultPrice" type="number" value="${s.defaultPrice}"></label><label>Store Logo<input type="file" id="lg" accept="image/*"></label><button class="btn" style="margin-top:12px">Save Settings</button></form>`)};
+
+/* ===== user accounts & info pages ===== */
+/* Auth is NOT connected. Production: Auth.signUp/signIn/reset call Supabase/Firebase Auth; purchases, saved books and downloads come from the database for the signed-in user. */
+const NB='<div class="note"><b>Not connected yet.</b> Accounts need a backend (e.g. Supabase or Firebase Auth). Submitting this form sends and stores nothing.</div>';
+const pAuth=k=>{const T={login:'Login',signup:'Create Account',forgot:'Reset Password'}[k];return `<form id="au" class="box narrow"><h2 style="margin-top:0">${T}</h2>${k==='signup'?'<label>Full name<input name="n" required autocomplete="name"></label>':''}<label>Email<input name="e" type="email" required autocomplete="email"></label>${k==='forgot'?'':`<label>Password<input name="p" type="password" minlength="8" required autocomplete="${k==='login'?'current':'new'}-password"></label>`}${k==='signup'?'<label>Confirm password<input name="p2" type="password" minlength="8" required autocomplete="new-password"></label>':''}${NB}<button class="btn b">${T}</button><p class="mu" style="text-align:center">${k==='login'?'<a href="#/forgot">Forgot password?</a> · <a href="#/signup">Create account</a>':'<a href="#/login">Back to login</a>'}</p></form>`};
+const pUser=()=>`<h2>My Dashboard</h2>${NB}<div class="tabs">${[['Profile','Name, email and preferences.'],['Purchased Books','Books you bought will appear here after verified payment.'],['Saved Books','Your favourites.'],['Downloads','Secure download links for purchased books.'],['Account Settings','Password and notifications.']].map(([t,d])=>`<div class="box"><b>${t}</b><p class="mu">${d}</p></div>`).join('')}</div><p><a class="btn o" href="#/login">Login</a></p>`;
+const doc=(t,b)=>`<div class="doc"><h1>${t}</h1>${b}</div>`;
+const pInfo=k=>({
+about:()=>doc('About',`<p>${esc(DB.settings.name)} offers practical digital books in English and Hindi at simple prices, so good ideas stay within everyone's reach.</p>`),
+contact:()=>doc('Contact',`<p>Questions about a book or an order? Email <b>${esc(DB.settings.email)}</b>.</p>${DB.settings.instagram?`<p><a href="${esc(DB.settings.instagram)}">Instagram</a></p>`:''}`),
+help:()=>doc('Help Center',`<details><summary>How do I get my book?</summary><p>After payment is verified, your book becomes available to download.</p></details><details><summary>Which languages are available?</summary><p>English and Hindi. Use the Hindi Books and English Books links.</p></details><details><summary>I did not receive my book</summary><p>Email us with your order ID.</p></details>`),
+privacy:()=>doc('Privacy Policy','<p class="note">Template text — replace with a policy reviewed for your business before launch.</p><p>We collect only the details needed to process orders (name, email). We do not sell personal data.</p>'),
+terms:()=>doc('Terms &amp; Conditions','<p class="note">Template text — replace with terms reviewed for your business before launch.</p><p>Books are digital products for personal use only. Sharing or reselling files is not permitted.</p>')}[k]());
+const foot=()=>foot();
 /* ===== router ===== */
 function route(){const [p,q]=(location.hash.slice(1)||'/').split('?');const s=p.split('/').filter(Boolean);const qs=new URLSearchParams(q||'');let h;
  if(s[0]==='admin'){if(!isAdmin())h=pLogin();else{const k=s[1]||'';h=k===''?pDash():k==='books'?pBooksAdmin():k==='add'?pForm():k==='edit'?pForm(s[2]):k==='orders'?pOrders():k==='order'?pOrderAdmin(s[2]):k==='categories'?pCats():pSettings()}}
- else h=!s.length?pHome():s[0]==='books'?pBooks(qs):s[0]==='book'?pBook(s[1]):s[0]==='cart'?pCart():s[0]==='checkout'?pCheckout():s[0]==='order'?pOrder(s[1]):pHome();
- $('#app').innerHTML=h+`<footer>${esc(DB.settings.name)} · ${esc(DB.settings.email)}${DB.settings.instagram?` · <a href="${esc(DB.settings.instagram)}">Instagram</a>`:''}</footer>`;window.scrollTo(0,0);cartBadge()}
+ else h=!s.length?pHome():s[0]==='books'?pBooks(qs):s[0]==='book'?pBook(s[1]):s[0]==='cart'?pCart():s[0]==='checkout'?pCheckout():s[0]==='order'?pOrder(s[1]):['login','signup','forgot'].includes(s[0])?pAuth(s[0]):s[0]==='dashboard'?pUser():['about','contact','help','privacy','terms'].includes(s[0])?pInfo(s[0]):pHome();
+ $('#app').innerHTML=h+`<footer>${esc(DB.settings.name)} · ${esc(DB.settings.email)}${DB.settings.instagram?` · <a href="${esc(DB.settings.instagram)}">Instagram</a>`:''}</footer>`;window.scrollTo(0,0);cartBadge();$('#links').classList.remove('open');$('#burger').setAttribute('aria-expanded','false')}
 addEventListener('hashchange',route);
 /* ===== events ===== */
 const addCart=id=>{const c=getCart(),x=c.find(i=>i.id===id);x?x.qty++:c.push({id,qty:1});setCart(c)};
@@ -151,12 +184,16 @@ document.addEventListener('change',async e=>{const t=e.target;
  if(t.id==='pf'&&t.files[0]){t.dataset.name=t.files[0].name;$('#pdfn').textContent=t.files[0].name}
  if(t.id==='lg'&&t.files[0])t.dataset.url=await fileData(t.files[0])});
 document.addEventListener('submit',e=>{e.preventDefault();const f=e.target,v=Object.fromEntries(new FormData(f));
- if(f.id==='login'){if(v.u==='admin'&&v.p==='admin123'){sessionStorage.setItem('sl_admin','1');route()}else toast('Wrong credentials (demo: admin / admin123)')}
+ if(f.id==='login'){adminAuth(v)}
+ else if(f.id==='hs'){F.q=v.q.trim();F.l='All';F.c='All';location.hash='#/books?l=All';route()}
+ else if(f.id==='au'){if(v.p2!==undefined&&v.p!==v.p2)toast('Passwords do not match');else toast('Accounts are not connected yet — nothing was sent')}
  else if(f.id==='co'){const items=cartItems().map(({b,qty})=>({id:b.id,title:b.title,language:b.language,price:b.price,qty}));const o=Payments.start({name:v.name,email:v.email,phone:v.phone},items);setCart([]);location.hash='#/order/'+o.id}
  else if(f.id==='bf'){const mode=e.submitter&&e.submitter.dataset.mode,id=f.dataset.id,old=id?bookById(id):null;
   const b={...(old||{id:'b'+Date.now(),createdAt:Date.now()}),title:v.title.trim(),author:v.author,shortDescription:v.shortDescription,description:v.description,language:v.language,category:v.category,price:+v.price,originalPrice:v.originalPrice?+v.originalPrice:'',pages:v.pages,publicationDate:v.publicationDate,whatYouLearn:lines(v.whatYouLearn),whoItsFor:lines(v.whoItsFor),tags:v.tags.split(',').map(x=>x.trim()).filter(Boolean),group:v.group.trim()||slug(v.title),featured:!!v.featured,published:mode==='draft'?false:!!v.published};
   const cu=$('#cv').dataset.url,pn=$('#pf').dataset.name;if(cu)b.coverUrl=cu;else b.coverUrl=b.coverUrl||'';if(pn)b.pdfFile=pn;else b.pdfFile=b.pdfFile||'';
   if(old)Object.assign(old,b);else DB.books.unshift(b);save();toast('Book added successfully.');location.hash='#/admin/books'}
  else if(f.id==='sf2'){Object.assign(DB.settings,v,{defaultPrice:+v.defaultPrice});const l=$('#lg').dataset.url;if(l)DB.settings.logo=l;save();cartBadge();toast('Settings saved')}});
+$('#burger').onclick=()=>{const o=$('#links').classList.toggle('open');$('#burger').setAttribute('aria-expanded',o)};
+$('#theme').onclick=()=>{const t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;localStorage.setItem('sl_theme',t)};
 route();
 </script></body></html>
