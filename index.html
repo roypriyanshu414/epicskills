@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Silent Library</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--tx:#1d1d1f;--mu:#6b6b70;--ac:#0f766e;--ac2:#0b5c56;--bd:#e7e3da;--bad:#b42318;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--card:#1f1f1e;--tx:#f2f0ea;--mu:#a3a29c;--bd:#33322f;--ac:#2dd4bf;--ac2:#5eead4}}
+:root[data-theme="dark"]{--bg:#151514;--card:#1f1f1e;--tx:#f2f0ea;--mu:#a3a29c;--bd:#33322f;--ac:#2dd4bf;--ac2:#5eead4}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",sans-serif}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--card);border-bottom:1px solid var(--bd);z-index:5}
+nav .wrap{display:flex;align-items:center;gap:14px;height:56px}nav b{font-size:18px;margin-right:auto}nav a{font-size:14px;color:var(--mu)}nav a:hover{color:var(--ac)}
+.btn{display:inline-block;background:var(--ac);color:#fff;border:0;border-radius:10px;padding:11px 18px;font-weight:600;cursor:pointer;text-align:center;transition:transform .15s}
+:root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#06201d}
+.btn:hover{transform:translateY(-1px)}.btn.o{background:transparent;color:var(--ac);border:1.5px solid var(--ac)}.btn.s{padding:6px 11px;font-size:13px}.btn.d{background:var(--bad);color:#fff}.btn.b{display:block;width:100%;padding:14px}
+.hero{padding:36px 0 22px}.hero h1{font-size:clamp(30px,6vw,48px);margin:0 0 8px;line-height:1.1}.hero p{color:var(--mu);font-size:18px;margin:0 0 18px}.row{display:flex;gap:10px;flex-wrap:wrap}
+h2{margin:26px 0 12px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:6px;animation:in .3s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.cover{aspect-ratio:3/4;border-radius:8px;overflow:hidden;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700;font-size:17px;line-height:1.2;position:relative}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.cover small{display:block;font-weight:400;opacity:.85;font-size:12px;margin-top:4px}
+.tag{display:inline-block;font-size:12px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:1px 9px;color:var(--mu)}
+.price{font-weight:700;font-size:18px}.old{text-decoration:line-through;color:var(--mu);font-weight:400;font-size:14px}.mu{color:var(--mu);font-size:14px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.bar input,.bar select,input,select,textarea{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;max-width:100%}
+.bar input{flex:1;min-width:150px}.chip{padding:7px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--card);cursor:pointer}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.two{display:grid;gap:22px;grid-template-columns:1fr}@media(min-width:760px){.two{grid-template-columns:300px 1fr}}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:14px}
+label{display:block;font-size:13px;color:var(--mu);margin:10px 0 3px}label input:not([type=checkbox]),label select,label textarea{width:100%}
+.note{background:#fff7e0;color:#5c4400;border:1px solid #f0d990;border-radius:8px;padding:10px 12px;font-size:14px;margin:10px 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--bd);white-space:nowrap}
+td img,.th{width:36px;height:48px;object-fit:cover;border-radius:4px;display:block}
+.st{font-size:12px;padding:2px 9px;border-radius:20px;background:var(--bd)}.st.Paid{background:#d1fae5;color:#065f46}.st.Pending{background:#fef3c7;color:#92400e}.st.Failed,.st.Cancelled{background:#fee2e2;color:#991b1b}
+.adm{display:grid;gap:16px;grid-template-columns:1fr;padding-top:14px}@media(min-width:800px){.adm{grid-template-columns:190px 1fr}}
+.side{display:flex;gap:6px;flex-wrap:wrap}@media(min-width:800px){.side{flex-direction:column;flex-wrap:nowrap}}
+.side a{padding:9px 12px;border-radius:8px;background:var(--card);border:1px solid var(--bd);font-size:14px}.side a.on{background:var(--ac);color:#fff}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.stats b{font-size:26px;display:block}
+.tools{display:flex;gap:6px}.sp{display:flex;justify-content:space-between;gap:8px;padding:5px 0}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#1d1d1f;color:#fff;padding:11px 18px;border-radius:10px;z-index:30;display:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}.modal .box{max-width:360px;margin:0}
+footer{margin:40px 0 20px;color:var(--mu);font-size:13px;text-align:center}
+</style></head><body>
+<nav><div class="wrap"><b><a href="#/" id="brand"></a></b><a href="#/books">Books</a><a href="#/books?l=Hindi">हिंदी</a><a href="#/books?l=English">English</a><a href="#/cart" id="cartlink">Cart</a></div></nav>
+<main class="wrap" id="app"></main>
+<div id="toast"></div>
+<script>
+/* ===== data layer (swap Store for Supabase/Firebase calls later) ===== */
+const CATS=['Self Development','Productivity','Career','Finance','Business','Motivation','Study','Other'];
+const LANGS=['English','Hindi','Other'];
+const LL=l=>l==='Hindi'?'हिंदी':l;
+const mk=(id,group,title,language,category,price,short,extra={})=>({id,group,title,language,category,price,originalPrice:'',author:'Demo Author',coverUrl:'',pdfFile:'',shortDescription:short,description:short+' (Sample content for the prototype.)',whatYouLearn:['Sample point one','Sample point two','Sample point three'],whoItsFor:['Anyone who wants simple, practical ideas'],pages:40,publicationDate:'2026-01-01',tags:[],featured:false,published:true,createdAt:Date.now()-Object.keys(extra).length*0-id.length,...extra});
+const seed=()=>({books:[
+ mk('b1','silent-engine','The Silent Engine','English','Self Development',49,'A practical guide to building quiet, steady daily momentum.',{featured:true,createdAt:Date.now()-1000}),
+ mk('b2','silent-engine','The Silent Engine','Hindi','Self Development',49,'रोज़ की शांत और स्थिर प्रगति बनाने की व्यावहारिक गाइड।',{featured:true,createdAt:Date.now()-900}),
+ mk('b3','demo-money','Sample: Money Basics','English','Finance',39,'Demo book — shows how a Finance title looks in the store.',{tags:['demo'],createdAt:Date.now()-800}),
+ mk('b4','demo-study','Sample: पढ़ाई की आदत','Hindi','Study',30,'डेमो किताब — Study श्रेणी का उदाहरण।',{tags:['demo'],createdAt:Date.now()-700}),
+ mk('b5','demo-career','Sample: Career Starter Notes','English','Career',50,'Demo book — shows how a Career title looks in the store.',{tags:['demo'],featured:true,createdAt:Date.now()-600})],
+ orders:[],settings:{name:'The Silent Library',description:'Practical digital books in English and Hindi.',email:'hello@example.com',instagram:'',currency:'INR',defaultPrice:49,logo:''}});
+const Store={load(){try{const d=JSON.parse(localStorage.getItem('sl_db'));if(d&&d.books)return d}catch{}const d=seed();this.save(d);return d},
+ save(d){try{localStorage.setItem('sl_db',JSON.stringify(d))}catch{toast('Storage full — use a smaller cover image')}}};
+let DB=Store.load();const save=()=>Store.save(DB);
+const getCart=()=>{try{return JSON.parse(localStorage.getItem('sl_cart'))||[]}catch{return[]}};
+const setCart=c=>{localStorage.setItem('sl_cart',JSON.stringify(c));cartBadge()};
+/* ===== payment service: NO verification here. Production: Razorpay etc. ===== */
+const Payments={
+ /* Prototype: only creates a PENDING order. Production: call your backend, which creates a gateway order using
+    PAYMENT_KEY / PAYMENT_SECRET (server env vars), then opens the gateway checkout. */
+ start(cust,items){const o={id:'ORD-'+Date.now().toString(36).toUpperCase(),...cust,items,amount:items.reduce((s,i)=>s+i.price*i.qty,0),status:'Pending',ref:'',date:Date.now(),downloaded:false};DB.orders.unshift(o);save();return o},
+ /* Production: this happens ONLY in a backend webhook after verifying the signature with WEBHOOK_SECRET. */
+ demoSimulateWebhook(id){const o=DB.orders.find(x=>x.id===id);if(o){o.status='Paid';o.ref='DEMO-'+id;save()}}};
+/* ===== helpers ===== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rs=n=>'₹'+Number(n||0);
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',2600)};
+const COL=['#0f766e','#7c3aed','#b45309','#be123c','#1d4ed8','#4d7c0f'];
+const cover=b=>{const c=COL[[...b.id].reduce((a,x)=>a+x.charCodeAt(0),0)%COL.length];return `<div class="cover" style="background:${c}">${b.coverUrl?`<img src="${esc(b.coverUrl)}" alt="">`:''}<span style="position:relative">${b.coverUrl?'':esc(b.title)}<small>${b.coverUrl?'':LL(b.language)}</small></span></div>`};
+const bookById=id=>DB.books.find(b=>b.id===id);
+const pubBooks=()=>DB.books.filter(b=>b.published);
+const sold=id=>DB.orders.filter(o=>o.items.some(i=>i.id===id)).length;
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'book';
+const lines=s=>String(s||'').split('\n').map(x=>x.trim()).filter(Boolean);
+const fileData=f=>new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.result);x.readAsDataURL(f)});
+const isAdmin=()=>sessionStorage.getItem('sl_admin')==='1';
+function cartBadge(){const n=getCart().reduce((s,i)=>s+i.qty,0);$('#cartlink').textContent='Cart'+(n?` (${n})`:'');$('#brand').textContent=DB.settings.name}
+/* ===== customer UI ===== */
+const card=b=>`<div class="card"><a href="#/book/${b.id}">${cover(b)}</a><div><span class="tag">${LL(b.language)}</span> <span class="tag">${esc(b.category)}</span></div><b>${esc(b.title)}</b><div class="mu">${esc(b.shortDescription)}</div><div class="price">${rs(b.price)} ${b.originalPrice?`<span class="old">${rs(b.originalPrice)}</span>`:''}</div><div class="row"><a class="btn o s" href="#/book/${b.id}">View Details</a><button class="btn s" data-act="buy" data-id="${b.id}">Buy Now</button></div></div>`;
+const BookGrid=l=>l.length?`<div class="grid">${l.map(card).join('')}</div>`:'<p class="mu">No books found.</p>';
+let F={q:'',l:'All',c:'All',s:'popular'};
+function filtered(){const q=F.q.toLowerCase();let l=pubBooks().filter(b=>(F.l==='All'||b.language===F.l)&&(F.c==='All'||b.category===F.c)&&(!q||[b.title,b.category,b.language,LL(b.language),b.shortDescription,b.description,b.tags.join(' ')].join(' ').toLowerCase().includes(q)));
+ const s={lo:(a,b)=>a.price-b.price,hi:(a,b)=>b.price-a.price,new:(a,b)=>b.createdAt-a.createdAt,popular:(a,b)=>sold(b.id)-sold(a.id)||(b.featured-a.featured)};return l.sort(s[F.s])}
+const pHome=()=>`<div class="hero"><h1>Good Books. Simple Prices.</h1><p>Practical digital books in English and Hindi — starting from just ₹30.</p><div class="row"><a class="btn" href="#/books">Explore Books</a><a class="btn o" href="#/books?l=Hindi">Hindi Books</a><a class="btn o" href="#/books?l=English">English Books</a></div></div><h2>Featured</h2>${BookGrid(pubBooks().filter(b=>b.featured))}`;
+const pBooks=(qs)=>{F.l=qs.get('l')||F.l;F.c=qs.get('c')||F.c;return `<h2>Books</h2><div class="bar"><input id="q" placeholder="Search title, category, language…" value="${esc(F.q)}"></div><div class="bar" id="lf">${['All','English','Hindi'].map(l=>`<button class="chip ${F.l===l?'on':''}" data-act="lang" data-v="${l}">${l==='Hindi'?'हिंदी':l}</button>`).join('')}</div><div class="bar"><select id="cf"><option>All</option>${CATS.map(c=>`<option ${F.c===c?'selected':''}>${c}</option>`).join('')}</select><select id="sf">${[['popular','Popular'],['new','Newest'],['lo','Price: Low to High'],['hi','Price: High to Low']].map(([v,t])=>`<option value="${v}" ${F.s===v?'selected':''}>${t}</option>`).join('')}</select></div><div id="res">${BookGrid(filtered())}</div>`};
+const pBook=id=>{const b=bookById(id);if(!b||(!b.published&&!isAdmin()))return '<p>Book not found.</p>';const alt=pubBooks().find(x=>x.group===b.group&&x.id!==b.id&&x.language!==b.language);
+ return `<div class="two" style="margin-top:18px"><div>${cover(b)}</div><div><span class="tag">${LL(b.language)}</span> <span class="tag">${esc(b.category)}</span><h1 style="margin:8px 0">${esc(b.title)}</h1><div class="mu">by ${esc(b.author)}${b.pages?' · '+b.pages+' pages':''}</div><p class="price" style="font-size:28px">${rs(b.price)} ${b.originalPrice?`<span class="old">${rs(b.originalPrice)}</span>`:''}</p><div class="row"><button class="btn" data-act="buy" data-id="${b.id}">Buy Now</button><button class="btn o" data-act="add" data-id="${b.id}">Add to Cart</button></div>${alt?`<div class="box" style="margin-top:14px">Available in another language: <a href="#/book/${alt.id}"><b>${esc(alt.title)} — ${LL(alt.language)}</b></a></div>`:''}<p>${esc(b.description)}</p><h3>What you'll learn</h3><ul>${b.whatYouLearn.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><h3>Who it's for</h3><ul>${b.whoItsFor.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`};
+const cartItems=()=>getCart().map(c=>({b:bookById(c.id),qty:c.qty})).filter(x=>x.b);
+const pCart=()=>{const it=cartItems();if(!it.length)return '<h2>Your cart</h2><p class="mu">Your cart is empty.</p><a class="btn" href="#/books">Browse books</a>';const t=it.reduce((s,x)=>s+x.b.price*x.qty,0);
+ return `<h2>Your cart</h2>${it.map(({b,qty})=>`<div class="box sp" style="align-items:center"><div><b>${esc(b.title)}</b> <span class="tag">${LL(b.language)}</span><div class="mu">${rs(b.price)} each</div></div><div class="row" style="align-items:center"><button class="btn o s" data-act="qty" data-id="${b.id}" data-d="-1">−</button>${qty}<button class="btn o s" data-act="qty" data-id="${b.id}" data-d="1">+</button><button class="btn d s" data-act="rm" data-id="${b.id}">Remove</button></div></div>`).join('')}<div class="box"><div class="sp"><span>Subtotal</span><span>${rs(t)}</span></div><div class="sp"><b>Total</b><b>${rs(t)}</b></div><p class="mu">Digital delivery — no shipping charges.</p><a class="btn b" href="#/checkout">Checkout</a></div>`};
+const pCheckout=()=>{const it=cartItems();if(!it.length)return pCart();const t=it.reduce((s,x)=>s+x.b.price*x.qty,0);
+ return `<h2>Checkout</h2><div class="two" style="grid-template-columns:1fr"><form id="co" class="box"><label>Full Name<input name="name" required></label><label>Email (your book access is sent here)<input name="email" type="email" required></label><label>Phone Number<input name="phone" type="tel" pattern="[0-9+ ]{10,14}" required></label><div class="note">Prototype: payment gateway is a placeholder. No payment is taken or verified.</div><button class="btn b" style="margin-top:8px">Pay ${rs(t)}</button></form><div class="box"><b>Order summary</b>${it.map(({b,qty})=>`<div class="sp"><span>${esc(b.title)} (${LL(b.language)}) ×${qty}</span><span>${rs(b.price*qty)}</span></div>`).join('')}<div class="sp"><b>Total</b><b>${rs(t)}</b></div></div></div>`};
+const pOrder=id=>{const o=DB.orders.find(x=>x.id===id);if(!o)return '<p>Order not found.</p>';
+ if(o.status==='Paid')return `<div class="box" style="text-align:center;margin-top:20px"><h1>Payment Successful 🎉</h1><p>Thank you for your purchase.</p><p><b>Your book is ready.</b></p><button class="btn" data-act="dl" data-id="${o.id}">Download Your Book</button><div class="note">Prototype placeholder. Production integration required: a private-storage, time-limited signed URL issued only for verified PAID orders.</div></div>`;
+ return `<div class="box" style="text-align:center;margin-top:20px"><h1>Order received</h1><p>Order <b>${o.id}</b> is <span class="st ${o.status}">${o.status}</span>. Payment has <b>not</b> been verified.</p><p class="mu">In production, the order becomes PAID only after your backend verifies the gateway webhook.</p><button class="btn o" data-act="sim" data-id="${o.id}">Demo only: simulate gateway webhook</button></div>`};
+/* ===== admin UI ===== */
+const nav=[['','Dashboard'],['books','Books'],['add','Add Book'],['orders','Orders'],['categories','Categories'],['settings','Settings']];
+const shell=(on,body)=>`<div class="adm"><div class="side">${nav.map(([k,t])=>`<a class="${on===k?'on':''}" href="#/admin/${k}">${t}</a>`).join('')}<a href="#" data-act="logout">Logout</a></div><div>${body}</div></div>`;
+const pLogin=()=>`<form id="login" class="box" style="max-width:380px;margin:30px auto"><h2 style="margin-top:0">Admin Login</h2><label>Email / Username<input name="u" required></label><label>Password<input name="p" type="password" required></label><div class="note"><b>Prototype only.</b> Demo credentials: admin / admin123. This check runs in the browser and is NOT secure. Production needs server-side authentication (e.g. Supabase Auth, Firebase Auth); never ship passwords in frontend code.</div><button class="btn b">Login</button></form>`;
+const pDash=()=>{const B=DB.books,O=DB.orders,P=O.filter(o=>o.status==='Paid');const S=[['Total Books',B.length],['English Books',B.filter(b=>b.language==='English').length],['Hindi Books',B.filter(b=>b.language==='Hindi').length],['Total Orders',O.length],['Paid Orders',P.length],['Revenue',rs(P.reduce((s,o)=>s+o.amount,0))]];
+ return shell('',`<h2 style="margin-top:0">Dashboard</h2><div class="stats">${S.map(([t,v])=>`<div class="box"><span class="mu">${t}</span><b>${v}</b></div>`).join('')}</div>`)};
+let AF={q:'',l:'All',c:'All',s:'All',o:'new'};
+const adminRows=()=>{const q=AF.q.toLowerCase();let l=DB.books.filter(b=>(!q||(b.title+b.author+b.tags.join(' ')).toLowerCase().includes(q))&&(AF.l==='All'||b.language===AF.l)&&(AF.c==='All'||b.category===AF.c)&&(AF.s==='All'||(AF.s==='Published')===b.published));
+ l.sort(AF.o==='lo'?(a,b)=>a.price-b.price:AF.o==='hi'?(a,b)=>b.price-a.price:(a,b)=>b.createdAt-a.createdAt);
+ return l.map(b=>`<tr><td><div class="th" style="overflow:hidden">${b.coverUrl?`<img src="${esc(b.coverUrl)}" alt="">`:`<div class="th" style="background:${COL[0]}"></div>`}</div></td><td>${esc(b.title)}</td><td>${LL(b.language)}</td><td>${esc(b.category)}</td><td>${rs(b.price)}</td><td><button class="btn o s" data-act="tg" data-f="published" data-id="${b.id}">${b.published?'Published':'Draft'}</button></td><td><button class="btn o s" data-act="tg" data-f="featured" data-id="${b.id}">${b.featured?'★ Yes':'No'}</button></td><td class="tools"><a class="btn s" href="#/admin/edit/${b.id}">Edit</a><button class="btn o s" data-act="dup" data-id="${b.id}">Duplicate</button><a class="btn o s" href="#/book/${b.id}">View</a><button class="btn d s" data-act="del" data-id="${b.id}">Delete</button></td></tr>`).join('')||'<tr><td colspan="8">No books.</td></tr>'};
+const sel=(id,opts,v)=>`<select id="${id}">${opts.map(o=>`<option ${o===v?'selected':''}>${o}</option>`).join('')}</select>`;
+const pBooksAdmin=()=>shell('books',`<h2 style="margin-top:0">Books</h2><div class="bar"><input id="aq" placeholder="Search books…" value="${esc(AF.q)}">${sel('al',['All',...LANGS],AF.l)}${sel('ac',['All',...CATS],AF.c)}${sel('as',['All','Published','Draft'],AF.s)}<select id="ao"><option value="new">Newest</option><option value="lo">Price ↑</option><option value="hi">Price ↓</option></select><a class="btn" href="#/admin/add">Add Book</a></div><div class="tw"><table><thead><tr><th>Cover</th><th>Title</th><th>Language</th><th>Category</th><th>Price</th><th>Status</th><th>Featured</th><th>Actions</th></tr></thead><tbody id="arows">${adminRows()}</tbody></table></div>`);
+const pForm=id=>{const e=id?bookById(id):null;if(id&&!e)return shell('books','<p>Not found.</p>');const b=e||{title:'',author:'',shortDescription:'',description:'',category:'Self Development',language:'English',price:DB.settings.defaultPrice,originalPrice:'',coverUrl:'',pdfFile:'',whatYouLearn:[],whoItsFor:[],pages:'',publicationDate:'',tags:[],featured:false,published:true,group:''};
+ return shell(e?'':'add',`<h2 style="margin-top:0">${e?'Edit Book':'Add New Book'}</h2><form id="bf" class="box" data-id="${id||''}"><label>Book Title<input name="title" required value="${esc(b.title)}"></label><label>Author Name<input name="author" value="${esc(b.author)}"></label><label>Short Description<input name="shortDescription" required value="${esc(b.shortDescription)}"></label><label>Full Description<textarea name="description" rows="4">${esc(b.description)}</textarea></label><div class="row"><label>Language${sel('x',[],'').replace('<select id="x">','<select name="language">').replace('</select>',LANGS.map(o=>`<option ${o===b.language?'selected':''}>${o}</option>`).join('')+'</select>')}</label><label>Category<select name="category">${CATS.map(o=>`<option ${o===b.category?'selected':''}>${o}</option>`).join('')}</select></label><label>Price (₹)<input name="price" type="number" min="1" required value="${b.price}"></label><label>Original Price (optional)<input name="originalPrice" type="number" value="${b.originalPrice}"></label></div><label>Book Cover<input type="file" id="cv" accept="image/*"></label><div style="width:90px"><div id="cvp">${b.coverUrl?`<img src="${esc(b.coverUrl)}" style="width:90px;border-radius:6px">`:''}</div></div><label>PDF File (current: <span id="pdfn">${esc(b.pdfFile)||'none'}</span>)<input type="file" id="pf" accept="application/pdf"></label><div class="note">Prototype stores only the PDF <b>file name</b>. Production integration required: upload the PDF to private storage, never a public URL.</div><label>What You'll Learn (one per line)<textarea name="whatYouLearn" rows="3">${esc(b.whatYouLearn.join('\n'))}</textarea></label><label>Who It's For (one per line)<textarea name="whoItsFor" rows="2">${esc(b.whoItsFor.join('\n'))}</textarea></label><div class="row"><label>Pages<input name="pages" type="number" value="${b.pages}"></label><label>Publication Date<input name="publicationDate" type="date" value="${b.publicationDate}"></label><label>Tags (comma separated)<input name="tags" value="${esc(b.tags.join(', '))}"></label></div><label>Edition key (books sharing it are linked as other-language editions)<input name="group" value="${esc(b.group)}"></label><label><input type="checkbox" name="featured" ${b.featured?'checked':''}> Featured book</label><label><input type="checkbox" name="published" ${b.published?'checked':''}> Published (visible in store)</label><div class="row" style="margin-top:12px"><button class="btn" data-mode="pub">Save Book</button><button class="btn o" data-mode="draft">Save as Draft</button><a class="btn o" href="#/admin/books">Cancel</a></div></form>`)};
+const pOrders=()=>shell('orders',`<h2 style="margin-top:0">Orders</h2><div class="tw"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Email</th><th>Book</th><th>Language</th><th>Amount</th><th>Status</th><th>Date</th><th></th></tr></thead><tbody>${DB.orders.map(o=>`<tr><td>${o.id}</td><td>${esc(o.name)}</td><td>${esc(o.email)}</td><td>${esc(o.items.map(i=>i.title).join(', '))}</td><td>${esc(o.items.map(i=>LL(i.language)).join(', '))}</td><td>${rs(o.amount)}</td><td><span class="st ${o.status}">${o.status}</span></td><td>${new Date(o.date).toLocaleDateString()}</td><td><a class="btn s" href="#/admin/order/${o.id}">Open</a></td></tr>`).join('')||'<tr><td colspan="9">No orders yet.</td></tr>'}</tbody></table></div>`);
+const pOrderAdmin=id=>{const o=DB.orders.find(x=>x.id===id);if(!o)return shell('orders','<p>Not found.</p>');return shell('orders',`<h2 style="margin-top:0">Order ${o.id}</h2><div class="box"><p><b>${esc(o.name)}</b><br>${esc(o.email)} · ${esc(o.phone)}</p>${o.items.map(i=>`<div class="sp"><span>${esc(i.title)} (${LL(i.language)}) ×${i.qty}</span><span>${rs(i.price*i.qty)}</span></div>`).join('')}<div class="sp"><b>Amount</b><b>${rs(o.amount)}</b></div><p>Payment status: <select id="os" data-id="${o.id}">${['Pending','Paid','Failed','Cancelled','Refunded'].map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}</select></p><p>Payment reference: ${esc(o.ref)||'—'}<br>Date: ${new Date(o.date).toLocaleString()}<br>Download status: ${o.downloaded?'Downloaded':'Not downloaded'}</p><div class="note">Changing status here is a manual prototype control. In production only the verified gateway webhook sets PAID.</div></div>`)};
+const pCats=()=>shell('categories',`<h2 style="margin-top:0">Categories</h2><div class="box">${CATS.map(c=>`<div class="sp"><span>${c}</span><span class="mu">${DB.books.filter(b=>b.category===c).length} books</span></div>`).join('')}</div><p class="mu">Categories are fixed in this prototype (edit CATS in the data layer).</p>`);
+const pSettings=()=>{const s=DB.settings;return shell('settings',`<h2 style="margin-top:0">Settings</h2><form id="sf2" class="box"><label>Store Name<input name="name" value="${esc(s.name)}"></label><label>Store Description<textarea name="description">${esc(s.description)}</textarea></label><label>Contact Email<input name="email" type="email" value="${esc(s.email)}"></label><label>Instagram Link<input name="instagram" value="${esc(s.instagram)}"></label><label>Currency<input name="currency" value="${esc(s.currency)}"></label><label>Default Book Price<input name="defaultPrice" type="number" value="${s.defaultPrice}"></label><label>Store Logo<input type="file" id="lg" accept="image/*"></label><button class="btn" style="margin-top:12px">Save Settings</button></form>`)};
+/* ===== router ===== */
+function route(){const [p,q]=(location.hash.slice(1)||'/').split('?');const s=p.split('/').filter(Boolean);const qs=new URLSearchParams(q||'');let h;
+ if(s[0]==='admin'){if(!isAdmin())h=pLogin();else{const k=s[1]||'';h=k===''?pDash():k==='books'?pBooksAdmin():k==='add'?pForm():k==='edit'?pForm(s[2]):k==='orders'?pOrders():k==='order'?pOrderAdmin(s[2]):k==='categories'?pCats():pSettings()}}
+ else h=!s.length?pHome():s[0]==='books'?pBooks(qs):s[0]==='book'?pBook(s[1]):s[0]==='cart'?pCart():s[0]==='checkout'?pCheckout():s[0]==='order'?pOrder(s[1]):pHome();
+ $('#app').innerHTML=h+`<footer>${esc(DB.settings.name)} · ${esc(DB.settings.email)}${DB.settings.instagram?` · <a href="${esc(DB.settings.instagram)}">Instagram</a>`:''}</footer>`;window.scrollTo(0,0);cartBadge()}
+addEventListener('hashchange',route);
+/* ===== events ===== */
+const addCart=id=>{const c=getCart(),x=c.find(i=>i.id===id);x?x.qty++:c.push({id,qty:1});setCart(c)};
+function confirmBox(msg,ok){const m=document.createElement('div');m.className='modal';m.innerHTML=`<div class="box"><p><b>${msg}</b></p><div class="row"><button class="btn o" data-x="0">Cancel</button><button class="btn d" data-x="1">Delete</button></div></div>`;m.onclick=e=>{const x=e.target.dataset.x;if(x===undefined)return;m.remove();if(x==='1')ok()};document.body.append(m)}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;const id=a.dataset.id,act=a.dataset.act;
+ if(act==='add'){addCart(id);toast('Added to cart')}
+ else if(act==='buy'){addCart(id);location.hash='#/checkout'}
+ else if(act==='rm'){setCart(getCart().filter(i=>i.id!==id));route()}
+ else if(act==='qty'){const c=getCart(),x=c.find(i=>i.id===id);x.qty=Math.max(1,x.qty+ +a.dataset.d);setCart(c);route()}
+ else if(act==='lang'){F.l=a.dataset.v;route()}
+ else if(act==='sim'){Payments.demoSimulateWebhook(id);route()}
+ else if(act==='dl'){const o=DB.orders.find(x=>x.id===id);o.downloaded=true;save();toast('Placeholder: production integration required (signed URL)')}
+ else if(act==='logout'){e.preventDefault();sessionStorage.removeItem('sl_admin');location.hash='#/admin'; route()}
+ else if(act==='tg'){const b=bookById(id);b[a.dataset.f]=!b[a.dataset.f];save();route()}
+ else if(act==='dup'){const b=bookById(id),n={...JSON.parse(JSON.stringify(b)),id:'b'+Date.now(),title:b.title,published:false,createdAt:Date.now()};DB.books.unshift(n);save();toast('Duplicated as draft — change the language and PDF');location.hash='#/admin/edit/'+n.id}
+ else if(act==='del')confirmBox('Are you sure you want to delete this book?',()=>{DB.books=DB.books.filter(b=>b.id!==id);save();route();toast('Book deleted')})});
+document.addEventListener('input',e=>{const t=e.target;
+ if(t.id==='q'||t.id==='cf'||t.id==='sf'){if(t.id==='q')F.q=t.value;if(t.id==='cf')F.c=t.value;if(t.id==='sf')F.s=t.value;$('#res').innerHTML=BookGrid(filtered())}
+ if(['aq','al','ac','as','ao'].includes(t.id)){AF[{aq:'q',al:'l',ac:'c',as:'s',ao:'o'}[t.id]]=t.value;$('#arows').innerHTML=adminRows()}
+ if(t.id==='os'){const o=DB.orders.find(x=>x.id===t.dataset.id);o.status=t.value;save();toast('Status updated')}});
+document.addEventListener('change',async e=>{const t=e.target;
+ if(t.id==='cv'&&t.files[0]){const d=await fileData(t.files[0]);t.dataset.url=d;$('#cvp').innerHTML=`<img src="${d}" style="width:90px;border-radius:6px">`}
+ if(t.id==='pf'&&t.files[0]){t.dataset.name=t.files[0].name;$('#pdfn').textContent=t.files[0].name}
+ if(t.id==='lg'&&t.files[0])t.dataset.url=await fileData(t.files[0])});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target,v=Object.fromEntries(new FormData(f));
+ if(f.id==='login'){if(v.u==='admin'&&v.p==='admin123'){sessionStorage.setItem('sl_admin','1');route()}else toast('Wrong credentials (demo: admin / admin123)')}
+ else if(f.id==='co'){const items=cartItems().map(({b,qty})=>({id:b.id,title:b.title,language:b.language,price:b.price,qty}));const o=Payments.start({name:v.name,email:v.email,phone:v.phone},items);setCart([]);location.hash='#/order/'+o.id}
+ else if(f.id==='bf'){const mode=e.submitter&&e.submitter.dataset.mode,id=f.dataset.id,old=id?bookById(id):null;
+  const b={...(old||{id:'b'+Date.now(),createdAt:Date.now()}),title:v.title.trim(),author:v.author,shortDescription:v.shortDescription,description:v.description,language:v.language,category:v.category,price:+v.price,originalPrice:v.originalPrice?+v.originalPrice:'',pages:v.pages,publicationDate:v.publicationDate,whatYouLearn:lines(v.whatYouLearn),whoItsFor:lines(v.whoItsFor),tags:v.tags.split(',').map(x=>x.trim()).filter(Boolean),group:v.group.trim()||slug(v.title),featured:!!v.featured,published:mode==='draft'?false:!!v.published};
+  const cu=$('#cv').dataset.url,pn=$('#pf').dataset.name;if(cu)b.coverUrl=cu;else b.coverUrl=b.coverUrl||'';if(pn)b.pdfFile=pn;else b.pdfFile=b.pdfFile||'';
+  if(old)Object.assign(old,b);else DB.books.unshift(b);save();toast('Book added successfully.');location.hash='#/admin/books'}
+ else if(f.id==='sf2'){Object.assign(DB.settings,v,{defaultPrice:+v.defaultPrice});const l=$('#lg').dataset.url;if(l)DB.settings.logo=l;save();cartBadge();toast('Settings saved')}});
+route();
+</script></body></html>
